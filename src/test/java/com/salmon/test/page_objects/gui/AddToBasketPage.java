@@ -18,7 +18,7 @@ public class AddToBasketPage extends PageObject {
 
     private By searchTextField = By.cssSelector("#SimpleSearchForm_SearchTerm");
     private By searchIcon = By.cssSelector("#search_submit");
-    private By productImageIcon = By.cssSelector(".product-image.b-lazy.loaded");
+    private By productImageIcon = By.xpath("//*[@id='catalogEntry_img268401']/img[1]");
     private By addToShoppingBag = By.cssSelector("a.button_add_to_cart > div.button_text");
     private By sizeNumber4 = By.cssSelector("#Size_options > ul > li:nth-of-type(5) > a > img");
     private By inStockText = By.cssSelector("#InventoryStatus_OnlineStatus_268401");
