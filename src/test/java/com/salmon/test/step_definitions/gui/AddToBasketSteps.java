@@ -58,6 +58,7 @@ public class AddToBasketSteps {
 
     @And("^I click on add to shopping bag button$")
     public void iClickOnAddToShoppingBagButton() throws Throwable {
+
        addToBasketPage.clickOnSizeFour();
        addToBasketPage.clickOnAddToShoppingBagButton();
 

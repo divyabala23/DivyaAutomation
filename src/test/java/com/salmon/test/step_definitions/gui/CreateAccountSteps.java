@@ -64,8 +64,10 @@ public class CreateAccountSteps {
         createAccountpage.selectDateOfBirth();
         createAccountpage.selectMonthOfBirth();
         createAccountpage.selectYearOfBirth();
-        createAccountpage.addressFinder();
-        createAccountpage.enterAddressManually();
+       // createAccountpage.addressFinder();
+        createAccountpage.enterAddressSuggestField();
+        createAccountpage.addressSelected();
+        // createAccountpage.enterAddressManually();
         //createAccountpage.enterAddressManually();
         createAccountpage.submitButton();
 

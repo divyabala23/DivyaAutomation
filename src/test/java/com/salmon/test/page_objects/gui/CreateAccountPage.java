@@ -66,7 +66,7 @@ public class CreateAccountPage extends PageObject {
     private By firstAddress = By.cssSelector(".pnlResults .pcaContent div:nth-of-type(1)");
     private By loginEmailTextField = By.cssSelector("#WC_AccountDisplay_FormInput_logonId_In_Logon_1");
     private By passwordTextField = By.cssSelector("input[type='password'][name='logonPassword']");
-    private By loginButton = By.cssSelector("div [name='Logon'][action='Logon'] .button_primary[role='button']");
+    private By loginButton = By.cssSelector("a[role='button'][class='button_primary'][id='WC_AccountDisplay_links_2']");
     private By signOutButton = By.cssSelector(".section_list.bottom_border.sign-out>ul>li>a");
     private By myAccountHeaderText = By.cssSelector("#MyAccountBreadcrumbLink");
     private By logonErrorMessage = By.cssSelector("#logonErrorMessage");
@@ -479,6 +479,8 @@ public class CreateAccountPage extends PageObject {
     public void enterInvalidLoginDetails(UserDetailsModel userDetails) {
         waitClearEnterText(loginEmailTextField, userDetails.getEmail());
         waitClearEnterText(passwordTextField, userDetails.getPassword());
+        ((JavascriptExecutor) webDriver)
+                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
         waitForExpectedElement(loginButton).click();
 
     }

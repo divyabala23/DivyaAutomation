@@ -28,8 +28,8 @@ Scenario: Verify the user is able to proceed to checkout page
      When I click on checkout button from the quick view basket
      And the product should be added to the basket successfully
      And the shopping bag page is displayed
-#     And I should be able to fill in the payment details
-#     Then the order placed successfully
+     And I should be able to fill in the payment details
+     Then the order placed successfully
 
 
 

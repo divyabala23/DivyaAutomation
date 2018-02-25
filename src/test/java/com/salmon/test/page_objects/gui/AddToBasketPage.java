@@ -18,9 +18,9 @@ public class AddToBasketPage extends PageObject {
 
     private By searchTextField = By.cssSelector("#SimpleSearchForm_SearchTerm");
     private By searchIcon = By.cssSelector("#search_submit");
-    private By productImageIcon = By.xpath("//*[@id='catalogEntry_img268401']/img[1]");
+    private By productImageIcon = By.cssSelector("img.roundel.b-lazy.loaded");
     private By addToShoppingBag = By.cssSelector("a.button_add_to_cart > div.button_text");
-    private By sizeNumber4 = By.cssSelector("#Size_options > ul > li:nth-of-type(5) > a > img");
+    private By sizeNumber4 = By.id("swatch_entitledItem_268401_5");
     private By inStockText = By.cssSelector("#InventoryStatus_OnlineStatus_268401");
     private By quickViewTotal = By.cssSelector("#minishopcart_total");
     private By checkOutButton = By.cssSelector("#miniShopCartBody > div.info > div.goToCheckout > a > div");
@@ -57,6 +57,8 @@ public class AddToBasketPage extends PageObject {
 
 
     public Boolean checkAddToShoppingBagisDisplayed() {
+        ((JavascriptExecutor) webDriver)
+                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
         waitForExpectedElement(addToShoppingBag);
         return elementIsDisplayedOrNot(element(addToShoppingBag));
     }
@@ -69,6 +71,7 @@ public class AddToBasketPage extends PageObject {
 
 
     public void clickOnSizeFour() {
+
         waitForExpectedElement(sizeNumber4);
         elementToBeClickable(sizeNumber4).click();
     }
@@ -93,7 +96,7 @@ public class AddToBasketPage extends PageObject {
     }
 
     public void clickOnAddToShoppingBagButton() {
-       // elementToBeClickable(addToShoppingBag);
+        elementToBeClickable(addToShoppingBag);
         waitForExpectedElement(addToShoppingBag).click();
 
     }

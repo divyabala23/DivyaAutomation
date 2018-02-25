@@ -47,19 +47,21 @@ public class HottersPLPSteps {
 
     @And("^user clicks on sort by dropdown$")
     public void userclicksonsortbydropdown() throws Throwable {
-        //hotterPLPPage.selectTheDropDown();
-       // hotterPLPPage.clickOnPriceRangeCheckBox();
+        hotterPLPPage.selectTheDropDown();
+        System.out.println("checkbox not selected");
+        hotterPLPPage.clickOnPriceRangeCheckBox();
+        System.out.println("checkbox selected");
         hotterPLPPage.selectTheDropDown();
         Assertions.assertThat(hotterPLPPage.searchResultsTextisDisplayed());
-//        hotterPLPPage.selectTheSecondOption();
-//        Assertions.assertThat(hotterPLPPage.searchResultsTextisDisplayed());
-//        //System.out.println("The second option clicked");
-//        hotterPLPPage.selectTheThirdOption();
-//        Assertions.assertThat(hotterPLPPage.searchResultsTextisDisplayed());
-//        hotterPLPPage.selectTheFourthOption();
-//        Assertions.assertThat(hotterPLPPage.searchResultsTextisDisplayed());
-//        hotterPLPPage.selectTheFifthOption();
-//        Assertions.assertThat(hotterPLPPage.searchResultsTextisDisplayed());
+        hotterPLPPage.selectTheSecondOption();
+        Assertions.assertThat(hotterPLPPage.searchResultsTextisDisplayed());
+        System.out.println("The second option clicked");
+        hotterPLPPage.selectTheThirdOption();
+        Assertions.assertThat(hotterPLPPage.searchResultsTextisDisplayed());
+        hotterPLPPage.selectTheFourthOption();
+        Assertions.assertThat(hotterPLPPage.searchResultsTextisDisplayed());
+        hotterPLPPage.selectTheFifthOption();
+        Assertions.assertThat(hotterPLPPage.searchResultsTextisDisplayed());
     }
 
     @Then("^all the sort options are allowed to be selected$")

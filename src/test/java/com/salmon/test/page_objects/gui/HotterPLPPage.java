@@ -19,8 +19,8 @@ private String searchShoes = "shoes";
 
 private By womensCategoryLink = By.cssSelector("#menu > li:nth-of-type(1) > a");
 
-private By priceRangeCheckBox = By.xpath(".//*[@id='facet_checkbox-0.00 - 50.00']");
-private By sortByDropDown = By.cssSelector("div.content > div:first-child > div.sorting_controls > select");
+private By priceRangeCheckBox = By.xpath("//input[type='checkbox'][@id='facet_checkbox-0.00 - 50.00']");
+private By sortByDropDown = By.id("sortby");
 
 private By newestIn = By.cssSelector("div.content > div:first-child > div.sorting_controls > select");
 
@@ -68,6 +68,8 @@ public void clickOnWomensCategoryLink(){
 }
 
 public void clickOnPriceRangeCheckBox(){
+    ((JavascriptExecutor) webDriver)
+            .executeScript("window.scrollTo(0, document.body.scrollHeight)");
    waitForExpectedElement(priceRangeCheckBox);
     elementToBeClickable(priceRangeCheckBox).click();
 }
