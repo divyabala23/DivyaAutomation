@@ -36,4 +36,3 @@ Scenario: Verify the user is able to proceed to checkout page
 
 
 
-

@@ -4,9 +4,11 @@ import com.salmon.test.page_objects.gui.AddToBasketPage;
 import com.salmon.test.page_objects.gui.CreateAccountPage;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.assertj.core.api.Assertions;
+import org.testng.Assert;
 
 public class AddToBasketSteps {
 
@@ -111,6 +113,8 @@ public class AddToBasketSteps {
       addToBasketPage.clickOnSizeFour();
 
     }
+
+
 
 
 }

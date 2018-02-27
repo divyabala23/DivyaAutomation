@@ -20,6 +20,19 @@ Feature: Acceptance test for create an account
     Then I click on signout to logout of my account
 
 
+  Scenario Outline: Verify and understand the scenariooutline working nature
+
+    When I enter the following "<Email>"
+    And  I enter the following "<Password>" in password field
+    Then I click on login submit button
+
+    Examples:
+      | Email                 | Password      |
+      | asdsadasdas@gmail.com | asfsdfsdfds   |
+      | ^&*(&^(&(&@gmail.com  | Testing123    |
+      |                       | dsfdsfdsfdsfs |
+
+
   Scenario: Verify unregistered user is able to login
 
    When I enter invalid acccount details

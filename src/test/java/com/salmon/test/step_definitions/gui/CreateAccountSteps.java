@@ -211,6 +211,27 @@ public class CreateAccountSteps {
         createAccountpage.clickOnRemoveAddressLink();
 
     }
+
+
+
+    @When("^I enter the following \"([^\"]*)\"$")
+    public void iEnterTheFolloWing(String Email)  {
+     createAccountpage.loginEmailAddress().sendKeys(Email);
+
+    }
+
+
+    @And("^I enter the following \"([^\"]*)\" in password field$")
+    public void iEnterTheFollowingInPasswordField(String Password)  {
+        createAccountpage.loginPassword().sendKeys(Password);
+    }
+
+
+    @Then("^I click on login submit button$")
+    public void iClickOnLoginSubmitButton() {
+        createAccountpage.loginButtonClick();
+    }
+
 }
 
 
