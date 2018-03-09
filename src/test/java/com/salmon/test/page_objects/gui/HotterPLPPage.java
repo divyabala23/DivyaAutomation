@@ -17,53 +17,63 @@ public class HotterPLPPage extends PageObject {
 
 private String searchShoes = "shoes";
 
-private By womensCategoryLink = By.cssSelector("#menu > li:nth-of-type(1) > a");
-
+private By womensCategoryLink = By.partialLinkText("WOMEN");
+private By mensCategoryLink = By.xpath("//*[text()='MEN']");
+private By wideFitCategoryLink = By.partialLinkText("WIDE FIT");
+private By goretxLink = By.partialLinkText("GORE-TEX®");
+private By originalLink = By.partialLinkText("ORIGINALS");
+private By accessoriesLink = By.partialLinkText("ACCESSORIES");
+private By outLetLink = By.partialLinkText("OUTLET");
 private By priceRangeCheckBox = By.xpath("//input[type='checkbox'][@id='facet_checkbox-0.00 - 50.00']");
 private By sortByDropDown = By.id("sortby");
-
 private By newestIn = By.cssSelector("div.content > div:first-child > div.sorting_controls > select");
-
 private By nameAZ = By.cssSelector("//*[text()='Newest In']");
-
 private By searchTextField = By.cssSelector("#SimpleSearchForm_SearchTerm");
-
 private By searchIcon = By.cssSelector("#search_submit");
-
-
 private By searchResultsText = By.cssSelector("div span#search_results_msg[role='heading'][aria-level='1']");
-
 private By termsAndConditions = By.cssSelector("div.footfleft.footterms > div:nth-of-type(1) > a");
-
 private By privacyPolicy = By.cssSelector("div.footfleft.footterms > div:nth-of-type(3) > a");
-
 private By cookiePolicy = By.cssSelector("div.footfleft.footterms > div:nth-of-type(5) > a");
-
 private By glossary = By.cssSelector("div.footfleft.footterms > div:nth-of-type(7) > a");
-
 private By modernSlaveryStatement = By.cssSelector("div.footfleft.footterms > div:nth-of-type(9) > a");
-
 private By hottersLogo = By.cssSelector("div.desklogo > div > a > img.initial.loading");
-
-
 private By termsAndCondTitle = By.cssSelector("div.main_content > div.widget_height > div:nth-of-type(1) > div:nth-of-type(1)");
-
-
 private By privacyAndSecurityTitle = By.cssSelector("#right_content > div:nth-of-type(1)");
-
 private By cookiePolicyTitle = By.cssSelector("div.widget_height > div > div:nth-of-type(1) > div:nth-of-type(5)");
-
-
 private By glossaryPageTitle = By.cssSelector("#bod > div:nth-of-type(2) > div:nth-of-type(2)");
-
 private By modernSlaveryTitle = By.cssSelector("div.main_content > div.widget_height > div:nth-of-type(1) > div > div");
 
 
 
-
-public void clickOnWomensCategoryLink(){
+public void clickOnWomensCategoryLink() {
     elementToBeClickable(womensCategoryLink).click();
+}
 
+public void clickOnMensCategoryLink(){
+    elementToBeClickable(mensCategoryLink).click();
+}
+
+public void clickOnWideFitCategoryLink(){
+    elementToBeClickable(wideFitCategoryLink).click();
+}
+
+public void clickOnGoreTexCategoryLink(){
+    elementToBeClickable(goretxLink).click();
+
+}
+
+public void clickOnOriginalsLink(){
+    elementToBeClickable(originalLink).click();
+}
+
+public void clickOnAccessoriesLink(){
+    elementToBeClickable(accessoriesLink).click();
+}
+
+
+
+public void clicOnOutLetLink(){
+    elementToBeClickable(outLetLink);
 
 }
 

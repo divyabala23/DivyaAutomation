@@ -13,9 +13,10 @@ import java.util.Map;
         "pretty", "html:target/cucumber-report/runwebat/",
         "json:target/cucumber-report/runwebat/cucumber.json",
         "rerun:target/cucumber-report/runwebat/rerun.txt"},
+        dryRun = false,//it will check if any step is not defined in step defintion file 'make it to true'
         glue = "com.salmon.test")
 public class RunWebATSuite extends AbstractTestNGCucumberTests {
-//    @BeforeClass
+ //   @BeforeClass
 //    public static void setup() {
 //        ExtentCucumberFormatter.initiateExtentCucumberFormatter(new File("target/feature-overview/SatishAutomationReport.html"));
 //        // Loads the extent config xml to customize on the report.

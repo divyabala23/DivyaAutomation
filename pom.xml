@@ -36,6 +36,16 @@
             </properties>
         </profile>
 
+        <profile>
+            <id>freeCrm</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.path>/profiles/freeCrm/config.properties</profile.path>
+                <testToRun>**/*DesktopSuite*.class</testToRun>
+            </properties>
+        </profile>
 
         <!-- Single Test -->
         <profile>
@@ -99,7 +109,7 @@
         <oracle.version>10.2.0.5</oracle.version>
         <maven-install-plugin>3.3.9</maven-install-plugin>
         <podam>6.0.2.RELEASE</podam>
-        <cucumber.extents.version>1.1.0</cucumber.extents.version>
+
     </properties>
 
 
@@ -438,8 +448,15 @@
         <dependency>
             <groupId>com.vimalselvam</groupId>
             <artifactId>cucumber-extentsreport</artifactId>
-            <version>${cucumber.extents.version}</version>
+            <version>3.0.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+
     </dependencies>
 
 

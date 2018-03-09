@@ -7,6 +7,7 @@ import com.salmon.test.models.cucumber.DeliveryAddressModel;
 import com.salmon.test.models.cucumber.UserDetailsModel;
 import com.salmon.test.page_objects.gui.CreateAccountPage;
 
+import cucumber.api.DataTable;
 import cucumber.api.PendingException;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -16,6 +17,7 @@ import org.assertj.core.api.Assertions;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Map;
 
 import static com.salmon.test.enums.PermittedCharacters.ALPHABETS;
 import static com.salmon.test.framework.helpers.utils.RandomGenerator.random;
@@ -43,9 +45,6 @@ public class CreateAccountSteps {
 //        }
 
 
-
-
-
     @When("^I click on My Account link from the header$")
     public void iClickOnMyAccountLinkFromTheHeader() throws Throwable {
         createAccountpage.clickMyAccountLink();
@@ -64,7 +63,7 @@ public class CreateAccountSteps {
         createAccountpage.selectDateOfBirth();
         createAccountpage.selectMonthOfBirth();
         createAccountpage.selectYearOfBirth();
-       // createAccountpage.addressFinder();
+        // createAccountpage.addressFinder();
         createAccountpage.enterAddressSuggestField();
         createAccountpage.addressSelected();
         // createAccountpage.enterAddressManually();
@@ -82,7 +81,7 @@ public class CreateAccountSteps {
     }
 
 
-   @And("^I enter valid login credentials and should be able to login$")
+    @And("^I enter valid login credentials and should be able to login$")
     public void iEnterValidLoginCredentialsinhottersite() throws Throwable {
         createAccountpage.enterLoginCredentials();
         createAccountpage.loginButtonClick();
@@ -117,14 +116,43 @@ public class CreateAccountSteps {
     }
 
     @When("^I enter invalid acccount details$")
-    public void iEnterInvalidAcccountDetails(List<UserDetailsModel> loginUserDetails) throws Throwable {
-
-        for (UserDetailsModel flag : loginUserDetails) {
-
-            createAccountpage.enterInvalidLoginDetails(flag);
+    public void iEnterInvalidAcccountDetails(DataTable usercredentials) {
 
 
+        //   public void iEnterInvalidAcccountDetails(List<UserDetailsModel> loginUserDetails) throws Throwable {
+
+//        for (UserDetailsModel flag : loginUserDetails) {
+//
+//            createAccountpage.enterInvalidLoginDetails(flag);
+
+
+//        List<List<String>> data = usercredentials.raw();
+//        createAccountpage.loginEmailAddress().sendKeys(data.get(0).get(0));
+//        createAccountpage.loginPassword().sendKeys(data.get(0).get(1));
+
+     //   List<Map<String,String >> data = usercredentials.asMaps(String.class, String.class);
+
+       for(Map<String,String> data : usercredentials.asMaps(String.class, String.class)){
+
+
+
+       // for(Map<String,String> data : usercredentials.asMaps(String.class, String.class)){
+
+            createAccountpage.loginEmailAddress().clear();
+            createAccountpage.loginEmailAddress().sendKeys(data.get("Email"));
+            createAccountpage.loginPassword().clear();
+            createAccountpage.loginPassword().sendKeys(data.get("Password"));
+            createAccountpage.loginButtonClick();
         }
+
+//    createAccountpage.loginEmailAddress().sendKeys(data.get(0).get("Email"));
+//    createAccountpage.loginPassword().sendKeys(data.get(0).get("Password"));
+//    createAccountpage.loginButtonClick();
+//    createAccountpage.loginEmailAddress().clear();
+//    createAccountpage.loginEmailAddress().sendKeys(data.get(1).get("Email"));
+//    createAccountpage.loginPassword().clear();
+//    createAccountpage.loginPassword().sendKeys(data.get(1).get("Password"));
+//    createAccountpage.loginButtonClick();
 
 
     }

@@ -33,7 +33,9 @@ Feature: Acceptance test for create an account
       |                       | dsfdsfdsfdsfs |
 
 
-  Scenario: Verify unregistered user is able to login
+
+
+  Scenario: Verify unregistered user is able to login (list of maps)
 
    When I enter invalid acccount details
       | Email                 | Password      |
