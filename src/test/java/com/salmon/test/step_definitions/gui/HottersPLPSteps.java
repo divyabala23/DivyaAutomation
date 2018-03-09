@@ -122,6 +122,27 @@ public class HottersPLPSteps {
 
 
     }
+
+
+    @Then("^I should see the page details$")
+    public void iShouldSeeThePageDetails() {
+
+    }
+
+    @When("^I click on \"([^\"]*)\" in the main page$")
+    public void iClickOnInTheMainPage(String CATEGORIES) throws Throwable {
+
+        hotterPLPPage.clickOnWomensCategoryLink();
+        System.out.println("link about to click");
+        hotterPLPPage.clickOnMensCategoryLink();
+        System.out.println("link about clicked");
+        hotterPLPPage.clickOnWideFitCategoryLink();
+        hotterPLPPage.clickOnGoreTexCategoryLink();
+        hotterPLPPage.clickOnOriginalsLink();
+        hotterPLPPage.clicOnOutLetLink();
+
+
+    }
 }
 
 
