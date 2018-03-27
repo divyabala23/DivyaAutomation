@@ -23,7 +23,7 @@ public class FreeCrmPage extends PageObject {
     private String passwordData = random(6, ALPHABETS);
     private String emailAddressData = RandomGenerator.randomEmailAddress(6);
 
-
+    private By loginField = By.xpath("//input[@placeholder='Username']");
     private By firstName = By.name("first_name");
 
     private By signUpLink = By.xpath("//div[@id='navbar-collapse']/ul/li");
@@ -47,6 +47,11 @@ public class FreeCrmPage extends PageObject {
     private By registrationConfirmationText = By.xpath("//div[@class='text_orange']");
 
     private By submitButtonRegistrationForm = By.id("submitButton");
+
+
+    public void enterLoginName(){
+        waitForExpectedElement(loginField).sendKeys();
+    }
 
     public void clickOnSignUpLink() throws InterruptedException {
 

@@ -1,4 +1,5 @@
-@demo
+@gui
+
 Feature: Acceptance test for create an account
   As a customer
   I want to register when I am in the hotters website
@@ -16,7 +17,7 @@ Feature: Acceptance test for create an account
 
 
   Scenario: Verify registered user is able to login
-    And I enter valid login credentials and should be able to login
+    And I Login with registered "UserType"
     Then I click on signout to logout of my account
 
 

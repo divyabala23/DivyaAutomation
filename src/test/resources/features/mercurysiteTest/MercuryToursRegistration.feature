@@ -2,6 +2,7 @@
 Feature: As a new user I want to register in mercury travel site
 
   Background:
+
     Given the user is on the "Home" page
 
 

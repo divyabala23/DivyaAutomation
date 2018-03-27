@@ -1,21 +1,16 @@
 package com.salmon.test.step_definitions.gui;
 
 import com.salmon.test.framework.helpers.Props;
-import com.salmon.test.framework.helpers.UrlBuilder;
 import com.salmon.test.framework.helpers.utils.RandomGenerator;
 import com.salmon.test.models.cucumber.DeliveryAddressModel;
-import com.salmon.test.models.cucumber.UserDetailsModel;
+import com.salmon.test.models.cucumber.Users;
 import com.salmon.test.page_objects.gui.CreateAccountPage;
 
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
-import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.When;
-import org.assertj.core.api.Assertions;
 
-import java.net.URI;
 import java.util.List;
 import java.util.Map;
 
@@ -32,9 +27,11 @@ public class CreateAccountSteps {
     private String lastNameData = random(6, ALPHABETS);
     private String emailAddressData = RandomGenerator.randomEmailAddress(6);
     private CreateAccountPage createAccountpage;
+    private Users user;
 
-    public CreateAccountSteps(CreateAccountPage createAccountpage) {
+    public CreateAccountSteps(CreateAccountPage createAccountpage, Users user) {
         this.createAccountpage = createAccountpage;
+        this.user = user;
     }
 
 
@@ -81,11 +78,21 @@ public class CreateAccountSteps {
     }
 
 
-    @And("^I enter valid login credentials and should be able to login$")
-    public void iEnterValidLoginCredentialsinhottersite() throws Throwable {
-        createAccountpage.enterLoginCredentials();
-        createAccountpage.loginButtonClick();
+    private void buildUser(String userType) {
+        user.setUserId(userType);
+        user.setUsername(Props.getProp(userType+".username"));
+        user.setPassword(Props.getProp(userType+".password"));
     }
+
+//    @And("^I enter valid login credentials and should be able to login$")
+//    public void iEnterValidLoginCredentialsinhottersite(String UserType) throws Throwable {
+//        buildUser(userType);
+//        createAccountpage.loginEmailAddress().sendKeys(user.getUsername());
+//        createAccountpage.loginPassword().sendKeys(user.getPassword());
+//
+//        //createAccountpage.enterLoginCredentials();
+//        createAccountpage.loginButtonClick();
+//    }
 
 //    @And("^I should be able to login to hotters site$")
 //    public void iShouldBeAbleToLogintohottersite() throws Throwable {
@@ -260,6 +267,18 @@ public class CreateAccountSteps {
         createAccountpage.loginButtonClick();
     }
 
+
+
+    @And("^I Login with registered \"([^\"]*)\"$")
+    public void iLoginWithRegistered(String userType) throws Throwable {
+        buildUser(userType);
+        createAccountpage.loginEmailAddress().sendKeys(user.getUsername());
+        createAccountpage.loginPassword().sendKeys(user.getPassword());
+
+        //createAccountpage.enterLoginCredentials();
+        createAccountpage.loginButtonClick();
+
+    }
 }
 
 

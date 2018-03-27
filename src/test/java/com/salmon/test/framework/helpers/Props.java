@@ -1,5 +1,6 @@
 package com.salmon.test.framework.helpers;
 
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +15,8 @@ public class Props {
     private static final Logger LOG = LoggerFactory.getLogger(Props.class);
     private static Properties environmentProps;
     private static Properties properties;
+    @Getter
+    private static Properties runProps;
 
 
     /**
