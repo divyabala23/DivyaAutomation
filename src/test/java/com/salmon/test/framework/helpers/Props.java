@@ -41,6 +41,7 @@ public class Props {
      **/
 
     public static String getProp(String key) {
+        loadRunConfigProps("/environment.properties");
         if ((key == null) || key.isEmpty()) {
             return "";
         } else {

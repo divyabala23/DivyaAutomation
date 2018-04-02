@@ -65,7 +65,20 @@
             </properties>
         </profile>
 
-        <!-- Running tets on mobile -->
+        <!-- api environment @  -->
+
+        <profile>
+            <id>api</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.path>/profiles/dev/config.properties</profile.path>
+                <testToRun>**/*RunApiATSuite*.class</testToRun>
+            </properties>
+        </profile>
+
+        <!-- Running tests on mobile -->
         <profile>
             <id>mobile</id>
             <activation>

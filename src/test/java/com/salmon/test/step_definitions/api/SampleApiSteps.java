@@ -5,6 +5,9 @@ import com.jayway.restassured.response.Response;
 import com.salmon.test.models.api.ItemModel;
 import com.salmon.test.models.api.ResponseModel;
 import com.salmon.test.services.SampleApi;
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
@@ -31,14 +34,14 @@ public class SampleApiSteps {
 
     /* Example with JsonPath to extract names of colour form JSON response
 
-    * Convert Response Object to asString(), which is Json Representation
-    * use JsonPath "from" to convert the Response Object to Json String Representation
-    * Access converted JSON String representation using locator e.g "colors.name"
-    *  Example with XmlPath
-    * String xml = post("/shopping").andReturn().body().asString()
-    * Node category = from(xml).get("shopping.category[0]");
+     * Convert Response Object to asString(), which is Json Representation
+     * use JsonPath "from" to convert the Response Object to Json String Representation
+     * Access converted JSON String representation using locator e.g "colors.name"
+     *  Example with XmlPath
+     * String xml = post("/shopping").andReturn().body().asString()
+     * Node category = from(xml).get("shopping.category[0]");
 
-    */
+     */
 
     @Then("^the colour collections contain colour name$")
     public void the_colour_collections_contain_colour_name() {
@@ -93,6 +96,7 @@ public class SampleApiSteps {
         }
 
     }
+
 
 
 }
