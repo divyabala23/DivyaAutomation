@@ -33,7 +33,7 @@ public class SampleWeatherSteps {
 
 
 
-    @Given("^I requet GetWeatherDetails by location$")
+    @Given("^I request GetWeatherDetails by location$")
     public void iRequetGetWeatherDetailsByLocation()  {
     RestAssured.baseURI = ENDPOINT_GET_WEATHERREPORT_CITY;
     }
