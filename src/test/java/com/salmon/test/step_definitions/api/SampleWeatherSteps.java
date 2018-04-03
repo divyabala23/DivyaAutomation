@@ -1,6 +1,8 @@
 package com.salmon.test.step_definitions.api;
 
 import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.response.Header;
+import com.jayway.restassured.response.Headers;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ValidatableResponse;
 import com.jayway.restassured.specification.RequestSpecification;
@@ -24,10 +26,11 @@ public class SampleWeatherSteps {
     private String ENDPOINT_GET_WEATHERREPORT_CITY = "http://restapi.demoqa.com/utilities/weather/city";
     private ValidatableResponse json;
     private String responseBody;
-    private String Location = "city";
+    private String Location;
     private String contentType;
     private String serverType;
     private String acceptLanguage;
+    private Headers allHeaders;
 
 
 
@@ -39,6 +42,7 @@ public class SampleWeatherSteps {
 
     @When("^I request location by  \"([^\"]*)\"$")
     public void iRequestLocationBy(String city) throws Throwable {
+        Location = "city";
        request = RestAssured.given();
        response = request.get(city);
 
@@ -52,7 +56,6 @@ public class SampleWeatherSteps {
 
         json = response.then().statusCode(statusCode);
         Assert.assertEquals(statusCode,response.getStatusCode());
-
         System.out.println("The status code displayed is : " + response.getStatusCode());
         }
 
@@ -100,6 +103,17 @@ public class SampleWeatherSteps {
 
         acceptLanguage = response.header("Content-Encoding");
         System.out.println("Content-Encoding: " + acceptLanguage);
+
+    }
+
+    @And("^Verify all the headers$")
+    public void verifyAllTheHeaders(){
+
+      Headers allHeaders = response.headers();
+      for(Header header : allHeaders){
+          System.out.println("Key: "   + header.getName() + " Value:"   + header.getValue());
+      }
+
 
     }
 }

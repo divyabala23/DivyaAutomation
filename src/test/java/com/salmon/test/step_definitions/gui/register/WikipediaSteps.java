@@ -26,7 +26,6 @@ public class WikipediaSteps {
     @Given("^I navigate to the wikipedia \"([^\"]*)\" page$")
     public void iNavigateToTheWikipediaPage(String pageName) throws Throwable {
         if (pageName.equalsIgnoreCase("HOME")) {
-
             UrlBuilder.startAtHomePage();
 
         }

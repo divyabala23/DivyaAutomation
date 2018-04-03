@@ -43,8 +43,17 @@ Feature: Weather API
     When  I request location by  "<city>"
     Then  Verify the “HTTP 200 OK” response is returned
     And   Verify the content type in the response header
-
     Examples:
-
       | city        |
       | Kolkata     |
+
+
+  Scenario Outline: Verify the response status line
+    Given I requet GetWeatherDetails by location
+    When  I request location by  "<city>"
+    Then  Verify the “HTTP 200 OK” response is returned
+    And   Verify all the headers
+    Examples:
+      | city        |
+      | Kolkata     |
+
