@@ -1,10 +1,7 @@
 package com.salmon.test.step_definitions.api;
 
 import com.jayway.restassured.RestAssured;
-import com.jayway.restassured.response.Header;
-import com.jayway.restassured.response.Headers;
-import com.jayway.restassured.response.Response;
-import com.jayway.restassured.response.ValidatableResponse;
+import com.jayway.restassured.response.*;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.salmon.test.services.SampleWeatherApi;
 import cucumber.api.PendingException;
@@ -31,6 +28,8 @@ public class SampleWeatherSteps {
     private String serverType;
     private String acceptLanguage;
     private Headers allHeaders;
+    private ResponseBody body;
+    private String bodyAsString;
 
 
 
@@ -110,9 +109,23 @@ public class SampleWeatherSteps {
     public void verifyAllTheHeaders(){
 
       Headers allHeaders = response.headers();
+        // Get all the headers. Return value is of type Headers.
+        // Headers class implements Iterable interface, hence we
+        // can apply an advance for loop to go through all Headers
+        // as shown in the code below
       for(Header header : allHeaders){
           System.out.println("Key: "   + header.getName() + " Value:"   + header.getValue());
       }
+
+
+    }
+
+    @And("^Verify the reponse body$")
+    public void verifyTheReponseBody()  {
+        body = response.getBody();
+        bodyAsString = body.asString();
+        System.out.println("Response Body is converted as string: "  + body.asString());
+        Assert.assertEquals(bodyAsString.contains("Delhi") /*Expected value*/, true /*Actual Value*/, "Response body contains Delhi");
 
 
     }
