@@ -3,24 +3,17 @@ package com.salmon.test.step_definitions.api;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.*;
 import com.jayway.restassured.specification.RequestSpecification;
-import com.salmon.test.services.SampleWeatherApi;
-import cucumber.api.PendingException;
+import com.salmon.test.framework.helpers.Props;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-
-import com.salmon.test.services.SampleWeatherApi;
-import org.apache.http.HttpRequest;
 import org.testng.Assert;
-
-import static com.jayway.restassured.RestAssured.given;
 
 public class SampleWeatherSteps {
 
     private RequestSpecification request;
     private Response response = null;
-    private String ENDPOINT_GET_WEATHERREPORT_CITY = "http://restapi.demoqa.com/utilities/weather/city";
     private ValidatableResponse json;
     private String responseBody;
     private String Location;
@@ -35,16 +28,15 @@ public class SampleWeatherSteps {
 
     @Given("^I request GetWeatherDetails by location$")
     public void iRequetGetWeatherDetailsByLocation()  {
-    RestAssured.baseURI = ENDPOINT_GET_WEATHERREPORT_CITY;
+    RestAssured.baseURI = Props.getProp("api.url");
     }
 
 
     @When("^I request location by  \"([^\"]*)\"$")
     public void iRequestLocationBy(String city) throws Throwable {
-        Location = "city";
-       request = RestAssured.given();
+       Location = "city";
+       request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
        response = request.get(city);
-
        System.out.println("Response Body is =>  " + response.asString());
         //System.out.println("response: " + response.prettyPrint());
     }

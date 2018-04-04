@@ -1,7 +1,6 @@
 package com.salmon.test.step_definitions.api;
 
 import com.salmon.test.services.UkLocationApi;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,7 +11,10 @@ import org.apache.http.impl.client.BasicResponseHandler;
 import org.assertj.core.api.Assertions;
 import org.testng.Assert;
 
-public class UKLocationSteps {
+/**
+ * Created by ravuris on 04/04/2018.
+ */
+public class UkLocationSteps {
     private HttpResponse response;
     String body;
 

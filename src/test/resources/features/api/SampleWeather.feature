@@ -11,10 +11,11 @@ Feature: Weather API
 
     Examples:
 
-      | city      |
-      | Hyderabad |
-      | Mumbai    |
-      | Delhi     |
+      | city       |
+      | Hyderabad  |
+      | Mumbai     |
+      | Delhi      |
+      | Vijayawada |
 
 
   Scenario Outline: Verify the success response code
@@ -66,6 +67,3 @@ Feature: Weather API
     Examples:
       | city  |
       | Delhi |
-
-
-
