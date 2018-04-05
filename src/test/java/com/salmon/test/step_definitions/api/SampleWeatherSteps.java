@@ -12,6 +12,8 @@ import org.testng.Assert;
 
 public class SampleWeatherSteps {
 
+
+
     private RequestSpecification request;
     private Response response = null;
     private ValidatableResponse json;
@@ -27,7 +29,7 @@ public class SampleWeatherSteps {
 
 
     @Given("^I request GetWeatherDetails by location$")
-    public void iRequetGetWeatherDetailsByLocation()  {
+    public void iRequestGetWeatherDetailsByLocation()  {
     RestAssured.baseURI = Props.getProp("api.url");
     }
 
