@@ -11,23 +11,21 @@ import org.json.JSONObject;
 import org.testng.Assert;
 
 import java.util.Map;
+import java.util.logging.Logger;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 /**
  * Created by ravuris on 04/04/2018.
  */
 public class SamplePostStepsApi {
 
-    private SampleWeatherSteps sampleWeatherSteps;
-
-    public SamplePostStepsApi(SampleWeatherSteps sampleWeatherSteps){
-        this.sampleWeatherSteps = sampleWeatherSteps;
-
-    }
-
-    private RequestSpecification request;
+     private RequestSpecification request;
     private Response response = null;
     private int statusCode;
     private String successCode;
+
+    private static final org.slf4j.Logger LOGGER = getLogger(SamplePostStepsApi.class);
 
     @Given("^I send a request to demoqa customer register endpoint$")
     public void iSendARequestToDemoqaCustomerRegisterEndpoint(){
@@ -38,7 +36,8 @@ public class SamplePostStepsApi {
 
     @When("^I post the below details$")
     public void iPostTheBelowDetails(Map<String,String> requestParams) throws Throwable {
-        request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
+        request = RestAssured.given();
+//        request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
         JSONObject jsonString = new JSONObject(requestParams);
 
 //        requestParams.put("FirstName", "kumar");
@@ -58,9 +57,13 @@ public class SamplePostStepsApi {
 
     @Then("^I get the success response with success code \"([^\"]*)\"$")
     public void iGetTheSuccessResponseWithSuccessCode(String arg0) throws Throwable {
-        statusCode = response.getStatusCode();
-        Assert.assertEquals(201, response.getStatusCode());
+        int statusCode = response.getStatusCode();
+        System.out.println("The status displayed is :"  + statusCode);
+
+     //   Assert.assertEquals(statusCode,"200");
+
         successCode = response.jsonPath().get("SuccessCode");
+        LOGGER.debug("The code returned is "  + successCode);
         Assert.assertEquals("Correct Success Code was returned", successCode,"OPERATION_SUCCESS");
 
 

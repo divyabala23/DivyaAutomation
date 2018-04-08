@@ -8,11 +8,13 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class SampleWeatherSteps {
-
-
 
     private RequestSpecification request;
     private Response response = null;
@@ -27,6 +29,8 @@ public class SampleWeatherSteps {
     private String bodyAsString;
 
 
+    private static final Logger LOGGER = getLogger(SampleWeatherSteps.class);
+
 
     @Given("^I request GetWeatherDetails by location$")
     public void iRequestGetWeatherDetailsByLocation()  {
@@ -37,10 +41,11 @@ public class SampleWeatherSteps {
     @When("^I request location by  \"([^\"]*)\"$")
     public void iRequestLocationBy(String city) throws Throwable {
        Location = "city";
-       request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
+       request = RestAssured.given();
+     //  request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
        response = request.get(city);
-       System.out.println("Response Body is =>  " + response.asString());
-        //System.out.println("response: " + response.prettyPrint());
+       //System.out.println("Response Body is =>  " + response.asString());
+        LOGGER.info("response: " + response.asString());
     }
 
 
@@ -49,16 +54,16 @@ public class SampleWeatherSteps {
 
         json = response.then().statusCode(statusCode);
         Assert.assertEquals(statusCode,response.getStatusCode());
-        System.out.println("The status code displayed is : " + response.getStatusCode());
+        LOGGER.debug("The status code displayed is : " + response.getStatusCode());
+       // System.out.println("The status code displayed is : " + response.getStatusCode());
         }
 
     @And("^I get response with weather report$")
     public void iGetResponseWithWeatherReport() {
 
         responseBody = response.getBody().asString();
-        System.out.println("Response Body is => "  + responseBody);
-
-
+       // System.out.println("Response Body is => "  + responseBody);
+        LOGGER.info("Response Body is => "  + responseBody);
     }
 
     @Then("^Verify the (\\d+) success response in the request$")
