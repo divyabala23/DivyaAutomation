@@ -15,7 +15,7 @@ public class UkLocationApi {
 
         HttpClient client = HttpClientBuilder.create().build();
 
-        URIBuilder uriBuilder = new URIBuilder(Props.getProp("api.url"));
+        URIBuilder uriBuilder = new URIBuilder(Props.getProp("soapapi.url"));
         uriBuilder .setParameter("county",county);
         HttpGet request = new HttpGet(uriBuilder.build());
 

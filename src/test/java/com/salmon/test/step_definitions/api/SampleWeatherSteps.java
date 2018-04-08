@@ -4,6 +4,7 @@ import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.*;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.salmon.test.framework.helpers.Props;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -128,4 +129,6 @@ public class SampleWeatherSteps {
 
 
     }
+
+
 }

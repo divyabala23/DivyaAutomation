@@ -2,8 +2,12 @@ package com.salmon.test.step_definitions.api;
 
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
+import com.jayway.restassured.response.ResponseBody;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.salmon.test.framework.helpers.Props;
+import com.salmon.test.models.api.RegistrationSuccessResponse;
+import cucumber.api.PendingException;
+import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
@@ -20,10 +24,12 @@ import static org.slf4j.LoggerFactory.getLogger;
  */
 public class SamplePostStepsApi {
 
-     private RequestSpecification request;
+    private RequestSpecification request;
     private Response response = null;
     private int statusCode;
     private String successCode;
+    private  RegistrationSuccessResponse responseBody;
+    private Map<String,String> requestParams;
 
     private static final org.slf4j.Logger LOGGER = getLogger(SamplePostStepsApi.class);
 
@@ -40,14 +46,6 @@ public class SamplePostStepsApi {
 //        request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
         JSONObject jsonString = new JSONObject(requestParams);
 
-//        requestParams.put("FirstName", "kumar");
-//        requestParams.put("LastName", "dfsfsd");
-//        requestParams.put("UserName", "TestUser001");
-//        requestParams.put("Password", "password1");
-//        requestParams.put("Email", "kumarrav@gmail.com");
-
-
-
         request.header("Content-Type", "application/json");
         request.body(requestParams.toString());
         response = request.post("/register");
@@ -56,8 +54,8 @@ public class SamplePostStepsApi {
     }
 
     @Then("^I get the success response with success code \"([^\"]*)\"$")
-    public void iGetTheSuccessResponseWithSuccessCode(String arg0) throws Throwable {
-        int statusCode = response.getStatusCode();
+    public void iGetTheSuccessResponseWithSuccessCode(String successCode) throws Throwable {
+         statusCode = response.getStatusCode();
         System.out.println("The status displayed is :"  + statusCode);
 
      //   Assert.assertEquals(statusCode,"200");
@@ -70,5 +68,20 @@ public class SamplePostStepsApi {
 
     }
 
+    @And("^I Deserialise the response body into registration success response model class$")
+    public void iDeserialiseTheResponseBodyIntoRegistrationSuccessResponseModelClass() {
+       // request.body(requestParams.toString());
+        //response = request.post("/register");
+        ResponseBody body = response.getBody();
+        RegistrationSuccessResponse responseBody = body.as(RegistrationSuccessResponse.class);
 
+    }
+
+
+    @Then("^verify the response received in the response class$")
+    public void verifyTheResponseReceivedInTheResponseClass()  {
+
+         Assert.assertEquals("OPERATION_SUCCESS", responseBody.SuccessCode);
+         Assert.assertEquals("Operation completed successfully", responseBody.Message);
+    }
 }
