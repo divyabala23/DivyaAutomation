@@ -59,7 +59,7 @@ public class SamplePostStepsApi {
     @Then("^I get the success response with success code \"([^\"]*)\"$")
     public void iGetTheSuccessResponseWithSuccessCode(String arg0) throws Throwable {
         statusCode = response.getStatusCode();
-        Assert.assertEquals(201, response.getStatusCode());
+        Assert.assertEquals(200, statusCode);
         successCode = response.jsonPath().get("SuccessCode");
         Assert.assertEquals("Correct Success Code was returned", successCode,"OPERATION_SUCCESS");
 
