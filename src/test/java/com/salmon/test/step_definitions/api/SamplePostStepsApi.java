@@ -47,7 +47,7 @@ public class SamplePostStepsApi {
         JSONObject jsonString = new JSONObject(requestParams);
 
         request.header("Content-Type", "application/json");
-        request.body(requestParams.toString());
+        request.body(jsonString.toString());
         response = request.post("/register");
         System.out.println("The request body returned is :  " +  response);
 
@@ -56,16 +56,11 @@ public class SamplePostStepsApi {
     @Then("^I get the success response with success code \"([^\"]*)\"$")
     public void iGetTheSuccessResponseWithSuccessCode(String successCode) throws Throwable {
          statusCode = response.getStatusCode();
-        System.out.println("The status displayed is :"  + statusCode);
-
-     //   Assert.assertEquals(statusCode,"200");
-
-        successCode = response.jsonPath().get("SuccessCode");
+         System.out.println("The status displayed is :"  + statusCode);
+         Assert.assertEquals(statusCode,200);
+         successCode = response.jsonPath().get("SuccessCode");
         LOGGER.debug("The code returned is "  + successCode);
         Assert.assertEquals("Correct Success Code was returned", successCode,"OPERATION_SUCCESS");
-
-
-
     }
 
     @And("^I Deserialise the response body into registration success response model class$")

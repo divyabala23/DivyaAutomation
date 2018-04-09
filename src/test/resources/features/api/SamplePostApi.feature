@@ -10,9 +10,6 @@ Feature: post request api
       | Email     | dfsfsd@gmail.com |
     Then I get the success response with success code "OPERATION_SUCCESS"
 
-
-
-
   Scenario: Deserializing the post response recieved
 
     Given I send a request to demoqa customer register endpoint

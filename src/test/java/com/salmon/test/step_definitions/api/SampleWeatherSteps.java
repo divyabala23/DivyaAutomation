@@ -45,7 +45,7 @@ public class SampleWeatherSteps {
        request = RestAssured.given();
      //  request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
        response = request.get(city);
-       //System.out.println("Response Body is =>  " + response.asString());
+       System.out.println("Response Body is =>  " + response.asString());
         LOGGER.info("response: " + response.asString());
     }
 
@@ -56,7 +56,7 @@ public class SampleWeatherSteps {
         json = response.then().statusCode(statusCode);
         Assert.assertEquals(statusCode,response.getStatusCode());
         LOGGER.debug("The status code displayed is : " + response.getStatusCode());
-       // System.out.println("The status code displayed is : " + response.getStatusCode());
+        System.out.println("The status code displayed is : " + response.getStatusCode());
         }
 
     @And("^I get response with weather report$")
