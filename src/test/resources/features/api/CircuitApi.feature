@@ -1,5 +1,5 @@
 @api
-Feature: F1 racing
+Feature: F1 racing feature
 
   Scenario: verify the list of circuits are retrieved for the 2017 formula 1 season
 
