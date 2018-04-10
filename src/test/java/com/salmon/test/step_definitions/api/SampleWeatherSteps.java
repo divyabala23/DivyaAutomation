@@ -10,8 +10,6 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 
-import static com.jayway.restassured.RestAssured.given;
-
 public class SampleWeatherSteps {
 
 
@@ -39,11 +37,8 @@ public class SampleWeatherSteps {
     @When("^I request location by  \"([^\"]*)\"$")
     public void iRequestLocationBy(String city) throws Throwable {
        Location = "city";
-       request = given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
-       //response= given().log().all().contentType("application/json");
-        response = request.get(city);
-
-
+       request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
+       response = request.get(city);
        System.out.println("Response Body is =>  " + response.asString());
         //System.out.println("response: " + response.prettyPrint());
     }
