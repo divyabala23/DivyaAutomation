@@ -2,7 +2,6 @@ package com.salmon.test.step_definitions.gui.register;
 
 import com.salmon.test.framework.helpers.UrlBuilder;
 import com.salmon.test.page_objects.gui.WikipediaPage;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -13,10 +12,11 @@ import org.slf4j.LoggerFactory;
 
 public class WikipediaSteps {
 
+
+
+    private static String inputData;
     private static final Logger LOG = LoggerFactory.getLogger(WikipediaSteps.class);
     private WikipediaPage wikipediapage;
-    private static String inputData;
-
     public WikipediaSteps(WikipediaPage wikipediapage) {
         this.wikipediapage = wikipediapage;
     }
@@ -37,6 +37,8 @@ public class WikipediaSteps {
     public void iEnterValidInTheInputField(String searchTerm) {
         inputData = searchTerm;
         wikipediapage.enterDataInSearchField().sendKeys(searchTerm);
+        LOG.debug("Search Term entered");
+        System.out.println("Search Term entered");
 
     }
 
