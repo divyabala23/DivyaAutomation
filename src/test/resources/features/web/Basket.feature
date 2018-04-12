@@ -1,4 +1,4 @@
-@gui
+@demo
 Feature: Add to basket button on PDP
   As a customer
   I want to add a product to my basket
@@ -8,7 +8,7 @@ Background:
 
   Given the user is on the "Home" page
   When I click on My Account link from the header
-  And I enter valid login credentials
+  And I enter valid login credentials and should be able to login
   When I enter "Marlowe GTX® Boots" and click on search
   And  I should see the product in the pdp page
   And  I click on displayed product
@@ -30,7 +30,6 @@ Scenario: Verify the user is able to proceed to checkout page
      And the shopping bag page is displayed
      And I should be able to fill in the payment details
      Then the order placed successfully
-
 
 
 

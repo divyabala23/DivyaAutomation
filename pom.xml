@@ -26,16 +26,26 @@
 
        <!-- Development environment @ my local machine -->
         <profile>
-            <id>dev01_flightsite</id>
+            <id>dev01</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <profile.path>/profiles/dev01_flightsite/config.properties</profile.path>
-                <testToRun>**/*WebATSuite*.class</testToRun>
+                <profile.path>/profiles/dev01/config.properties</profile.path>
+                <testToRun>**/*DesktopSuite*.class</testToRun>
             </properties>
         </profile>
 
+        <profile>
+            <id>freeCrm</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.path>/profiles/freeCrm/config.properties</profile.path>
+                <testToRun>**/*DesktopSuite*.class</testToRun>
+            </properties>
+        </profile>
 
         <!-- Single Test -->
         <profile>
@@ -55,7 +65,20 @@
             </properties>
         </profile>
 
-        <!-- Running tets on mobile -->
+        <!-- api environment @  -->
+
+        <profile>
+            <id>api</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.path>/profiles/api/config.properties</profile.path>
+                <testToRun>**/*RunApiATSuite*.class</testToRun>
+            </properties>
+        </profile>
+
+        <!-- Running tests on mobile -->
         <profile>
             <id>mobile</id>
             <activation>
@@ -99,7 +122,7 @@
         <oracle.version>10.2.0.5</oracle.version>
         <maven-install-plugin>3.3.9</maven-install-plugin>
         <podam>6.0.2.RELEASE</podam>
-        <cucumber.extents.version>1.1.0</cucumber.extents.version>
+
     </properties>
 
 
@@ -172,12 +195,12 @@
                     <!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
                     <encoding>${utf-8}</encoding>
 
-                    <resources>
+                    <!--resources>
                         <resource>
                             <directory>src/main/resources</directory>
                             <filtering>true</filtering>
                         </resource>
-                    </resources>
+                    </resources-->
 
                 </configuration>
             </plugin>
@@ -438,9 +461,28 @@
         <dependency>
             <groupId>com.vimalselvam</groupId>
             <artifactId>cucumber-extentsreport</artifactId>
-            <version>${cucumber.extents.version}</version>
+            <version>3.0.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+            <dependency>
+                <groupId>com.google.code.gson</groupId>
+                <artifactId>gson</artifactId>
+                <version>2.8.2</version>
+                <scope>compile</scope>
+            </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20131018</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
+
 
 
 </project>

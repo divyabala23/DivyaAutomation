@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@CucumberOptions(features = "src/test/resources/features/mercurysiteTest", tags = "@gui", monochrome = true, plugin = {
+@CucumberOptions(features = "target/test-classes", tags = "@demo", monochrome = true, plugin = {
         "pretty", "html:target/cucumber-report/runjenkins",
         "json:target/cucumber-report/runjenkins/cucumber.json",
         "rerun:target/cucumber-report/runjenkins/rerun.txt"},
@@ -27,5 +27,5 @@ public class RunJenkinsSuite extends AbstractTestNGCucumberTests {
 //            systemInfo.put("Cucumber version", "v1.2.5");
 //            ExtentCucumberFormatter.addSystemInfo(systemInfo);
 //        }
-
+    //src/test/resources/features/mercurysiteTest
     }

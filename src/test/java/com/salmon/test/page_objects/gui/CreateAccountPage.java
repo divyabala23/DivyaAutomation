@@ -8,6 +8,8 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import com.salmon.test.models.cucumber.UserDetailsModel;
 import com.salmon.test.framework.helpers.Props;
+
+import java.security.Key;
 import java.util.List;
 
 import static com.salmon.test.enums.PermittedCharacters.ALPHABETS;
@@ -21,6 +23,7 @@ public class CreateAccountPage extends PageObject {
     private String titleData = "Dr";
     private String firstNameData = random(6, ALPHABETS);
     private String lastNameData = random(6, ALPHABETS);
+    private String addressNameData= random(6,ALPHABETS);
     private String emailAddressData = RandomGenerator.randomEmailAddress(6);
     private String phoneNumberData = "00447932689587";
     private String passwordData = "Testing12345£";
@@ -33,8 +36,10 @@ public class CreateAccountPage extends PageObject {
     private String loginPasswodData = "London2323"; // "Pa55word14";
 
 
-    private By myAccountLink = By.cssSelector("#ems_country_11253 > div:nth-child(6) > div:nth-child(1) > a");
-    private By registerButton = By.cssSelector("div#WC_AccountDisplay_div_24.button_align a#WC_AccountDisplay_links_3.button_primary");
+    private By myAccountLink = By.linkText("My Account");
+
+    //private By myAccountLink = By.cssSelector("#ems_country_11253 > div:nth-child(6) > div:nth-child(1) > a");
+    private By registerButton = By.xpath("//*[@id='WC_AccountDisplay_links_3']");
     private By titleList = By.name("personTitle");
     private By firstNameField = By.cssSelector("input[type='text'][name='firstName']");
     private By lastNameField = By.cssSelector("input[type='text'][name='lastName']");
@@ -50,6 +55,8 @@ public class CreateAccountPage extends PageObject {
     private By addressField = By.cssSelector(".inputArea input");
     //private By enterAddressManuallyLink = By.partialLinkText("enter address manually");
     private By enterAddressManuallyLink = By.cssSelector("#HAddressFinderAlternate");
+    private By addressSuggestField = By.cssSelector("input.search");
+    private By addressContainer = By.cssSelector("div.pnlResults > div.pcaContent");
 
     private By addressLine1Field = By.cssSelector("input[type='text'][name='address1']");
     private By addressLine2Field = By.cssSelector("input[type='text'][name='address2']");
@@ -59,12 +66,12 @@ public class CreateAccountPage extends PageObject {
     private By firstAddress = By.cssSelector(".pnlResults .pcaContent div:nth-of-type(1)");
     private By loginEmailTextField = By.cssSelector("#WC_AccountDisplay_FormInput_logonId_In_Logon_1");
     private By passwordTextField = By.cssSelector("input[type='password'][name='logonPassword']");
-    private By loginButton = By.cssSelector("div [name='Logon'][action='Logon'] .button_primary[role='button']");
+    private By loginButton = By.cssSelector("a[role='button'][class='button_primary'][id='WC_AccountDisplay_links_2']");
     private By signOutButton = By.cssSelector(".section_list.bottom_border.sign-out>ul>li>a");
     private By myAccountHeaderText = By.cssSelector("#MyAccountBreadcrumbLink");
     private By logonErrorMessage = By.cssSelector("#logonErrorMessage");
     private By myAddressBookLink = By.cssSelector("div.content_section > div:nth-of-type(2) > ul > li:nth-of-type(3) > a");
-    private By addNewAddressButton = By.cssSelector("a.button_primary.addNewDelivery > div.button_text");
+    private By addNewAddressButton = By.linkText("+ Add New Delivery Address");
     private By addressNameTextField = By.cssSelector("#nickName");
     private By firstNameTextField = By.cssSelector("#firstName");
     private By lastNameTextField = By.cssSelector("#lastName");
@@ -73,15 +80,48 @@ public class CreateAccountPage extends PageObject {
     private By cityTextField = By.cssSelector("[name='city']");
     private By postCodeTextField = By.cssSelector("[name='zipCode']");
     private By phoneNumberTextField = By.cssSelector("div > div:nth-of-type(6) > input");
-    private By addAddressSubmitButton = By.cssSelector("a.button_primary.flright > div.button_text");
+    private By addAddressSubmitButton = By.linkText("Add Address");
     private By errorMessageOnFields = By.cssSelector("div.dijitTooltipContainer.dijitTooltipContents");
+    private By addressBook = By.linkText("My Address Book");
+    private By removeAddress = By.linkText("Remove Address");
 
+    public void clickOnAddressSubmitButton(){
+     WebElement element = waitForExpectedElement(addAddressSubmitButton);
+     jsClick(element);
+    }
+
+
+    public void addressSelected(){
+        waitForExpectedElement(addressContainer);
+         WebElement element = waitForExpectedElement(addressContainer);
+        Actions a = new Actions(getWebDriver());
+        elementToBeVisible(addressContainer);
+        a.moveToElement(element).click();
+        a.sendKeys(Keys.ARROW_DOWN,Keys.ARROW_DOWN,Keys.ARROW_DOWN);
+        a.sendKeys(Keys.ENTER).build().perform();
+        System.out.println("element successfully selected");
+
+
+
+
+
+
+        }
 
     public void clickMyAddressLink() {
 
              waitForExpectedElement(myAddressBookLink).click();
     }
 
+
+    public void clickOnRemoveAddressLink(){
+
+        WebElement element = waitForExpectedElement(removeAddress);
+        ((JavascriptExecutor) webDriver)
+                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+            if(element.isDisplayed())
+            element.click();
+    }
 
     public void clickOnAddNewAddressButton() {
         ((JavascriptExecutor) webDriver)
@@ -92,7 +132,9 @@ public class CreateAccountPage extends PageObject {
 
 
     public void clickMyAccountLink() {
-        waitForExpectedElement(myAccountLink).click();
+       // System.out.println("Account link clicked" + myAccountLink);
+              waitForExpectedElement(myAccountLink).click();
+         //     System.out.println("account link");
     }
 
       /*  List<WebElement> l = webDriver.findElements(By.tagName("a"));
@@ -114,10 +156,15 @@ public class CreateAccountPage extends PageObject {
 
 
     public void clickOnRegisterbutton() {
+        ((JavascriptExecutor) webDriver)
+                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        elementToBeClickable(registerButton).click();
 
-        waitForExpectedElement(registerButton);
-        waitForExpectedElement(registerButton).click();
+    }
 
+
+    public  void clickAddressBook(){
+        waitForExpectedElement(addressBook).click();
     }
 
 
@@ -246,10 +293,10 @@ public class CreateAccountPage extends PageObject {
 
         return getWebDriver().findElement(firstAddress);
     }
-   /* public WebElement addressFinderText()
+    public WebElement addressFinderText()
     {
         return waitForExpectedElement(addressSuggestions);
-    }*/
+    }
 
 
 
@@ -326,6 +373,23 @@ public class CreateAccountPage extends PageObject {
 
         WebElement element = elementToBeVisible(enterAddressManuallyLink);
         jsClick(element);
+    }
+
+
+
+
+
+
+   public void enterAddressSuggestField() {
+       WebElement element = webDriver.findElement(addressSuggestField);
+       element.sendKeys(addressFinderData);
+   }
+
+
+
+      // waitForExpectedElement(addressSuggestField).sendKeys(addressFinderData);
+
+
 
 
         //WebElement addressTextBox = elementToBeVisible(addressField);
@@ -361,8 +425,8 @@ public class CreateAccountPage extends PageObject {
 //       a.sendKeys(Keys.chord(Keys.ARROW_DOWN,Keys.ARROW_DOWN)).sendKeys(Keys.ENTER).perform();
 
 
-        waitForExpectedElement(submitButton);
-    }
+      //  waitForExpectedElement(submitButton);
+    //}
 
 
     public WebElement loginEmailAddress() {
@@ -375,13 +439,19 @@ public class CreateAccountPage extends PageObject {
     }
 
    public void  loginButtonClick() {
-       waitForExpectedElement(loginButton).click();
+       ((JavascriptExecutor) webDriver)
+               .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+         elementToBeClickable(loginButton).click();
+
     }
 
 
     public void signOutButtonClick() {
         elementToBeClickable(signOutButton).click();
     }
+
+
+
 
 
     public void enterLoginCredentials() {
@@ -412,9 +482,14 @@ public class CreateAccountPage extends PageObject {
     public void enterInvalidLoginDetails(UserDetailsModel userDetails) {
         waitClearEnterText(loginEmailTextField, userDetails.getEmail());
         waitClearEnterText(passwordTextField, userDetails.getPassword());
+        ((JavascriptExecutor) webDriver)
+                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
         waitForExpectedElement(loginButton).click();
 
     }
+
+
+
 
 /*
        loginEmailAddress()
@@ -429,6 +504,19 @@ public class CreateAccountPage extends PageObject {
 
     }
 
+    public void enterAutoAddressDetails(){
+        waitForExpectedElement(addressNameTextField).sendKeys(addressNameData);
+        waitForExpectedElement(firstNameTextField).sendKeys(firstNameData);
+        waitForExpectedElement(lastNameTextField).sendKeys(lastNameData);
+
+    }
+
+
+    public  void enterAutoAddressPhoneNumber(){
+        ((JavascriptExecutor) webDriver)
+                .executeScript("window.scrollTo(0, document.body.scrollHeight)");
+        elementToBeVisible(phoneNumberTextField).sendKeys("07932689584");
+    }
 
     public void enterNewAddressMandatoryDetails(DeliveryAddressModel deliveryAddressModel) {
 

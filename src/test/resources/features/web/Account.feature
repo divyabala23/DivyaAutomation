@@ -1,4 +1,5 @@
-@gui @demo
+@gui
+
 Feature: Acceptance test for create an account
   As a customer
   I want to register when I am in the hotters website
@@ -16,14 +17,28 @@ Feature: Acceptance test for create an account
 
 
   Scenario: Verify registered user is able to login
-  #  And I enter valid login credentials
-    And I should be able to login
+    And I Login with registered "UserType"
     Then I click on signout to logout of my account
 
 
-  Scenario: Verify unregistered user is able to login
+  Scenario Outline: Verify and understand the scenariooutline working nature
 
-  # When I enter invalid acccount details
+    When I enter the following "<Email>"
+    And  I enter the following "<Password>" in password field
+    Then I click on login submit button
+
+    Examples:
+      | Email                 | Password      |
+      | asdsadasdas@gmail.com | asfsdfsdfds   |
+      | ^&*(&^(&(&@gmail.com  | Testing123    |
+      |                       | dsfdsfdsfdsfs |
+
+
+
+
+  Scenario: Verify unregistered user is able to login (list of maps)
+
+   When I enter invalid acccount details
       | Email                 | Password      |
       | asdsadasdas@gmail.com | asfsdfsdfds   |
       | ^&*(&^(&(&@gmail.com  | Testing123    |
@@ -31,9 +46,23 @@ Feature: Acceptance test for create an account
 
     Then I should see an error message
 
-  Scenario: Deliver address mandatory field check
-    And I enter valid login credentials
-    And I should be able to login
+
+
+  Scenario: Delivery address Auto select
+    And I enter valid login credentials and should be able to login
+    When I click on Add new address button
+    And I enter address details in form
+    And enter postcode in the address field
+    When I select address from auto suggest list
+    And I enter phoneNumber in the form
+    And I click on add address submit button
+    When I click on addressbook link in my account page
+    And I click on removeAddress from the address page
+    Then I click on signout to logout of my account
+
+
+  Scenario: Delivery address mandatory field check
+    And I enter valid login credentials and should be able to login
     When I click on Add new address button
     Then verify error message if I enter invalid details leaving a mandatory field empty to delivery address field
       | AddressName | FirstName | LastName  | Addressline1 | city  | postalcode | PhoneNumber | ErrorMessage                     |

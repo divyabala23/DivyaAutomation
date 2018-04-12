@@ -9,13 +9,14 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-@CucumberOptions(features = "src/test/resources/features/mercurysiteTest", tags = {"@gui"}, monochrome = true, plugin = {
+@CucumberOptions(features = "target/test-classes", tags = {"@gui"}, monochrome = true, plugin = {
         "pretty", "html:target/cucumber-report/runwebat/",
         "json:target/cucumber-report/runwebat/cucumber.json",
         "rerun:target/cucumber-report/runwebat/rerun.txt"},
+        dryRun = false,//it will check if any step is not defined in step defintion file 'make it to true'
         glue = "com.salmon.test")
 public class RunWebATSuite extends AbstractTestNGCucumberTests {
-//    @BeforeClass
+ //   @BeforeClass
 //    public static void setup() {
 //        ExtentCucumberFormatter.initiateExtentCucumberFormatter(new File("target/feature-overview/SatishAutomationReport.html"));
 //        // Loads the extent config xml to customize on the report.
@@ -24,5 +25,5 @@ public class RunWebATSuite extends AbstractTestNGCucumberTests {
 //        Map systemInfo = new HashMap();
 //        systemInfo.put("Cucumber version", "v1.2.5");
 //        ExtentCucumberFormatter.addSystemInfo(systemInfo);
-//    }
+//    }//src/test/resources/features/mercurysiteTest
 }

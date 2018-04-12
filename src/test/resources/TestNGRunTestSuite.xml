@@ -17,4 +17,15 @@
             <class name="com.salmon.test.RunApiATSuite"/>
         </classes>
     </test>
-</suite>
+
+    <test name="ParallelThread2">
+        <!-- Specify the Run Suite classes which needed to be run in parallel -->
+
+    <classes>
+
+        <class name="com.salmon.test.RunDesktopSuite"/>
+
+    </classes>
+</test>
+
+   </suite>
