@@ -1,9 +1,14 @@
 package com.salmon.test.step_definitions.gui;
 
+
+import com.salmon.test.framework.helpers.Props;
 import com.salmon.test.framework.helpers.UrlBuilder;
 import com.salmon.test.models.cucumber.MercuryLoginUserModel;
 import com.salmon.test.models.cucumber.MercuryToursSignUpModel;
 import com.salmon.test.page_objects.gui.MercuryToursRegistrationPage;
+import com.salmon.test.page_objects.gui.MyAccountSummaryPage;
+import cucumber.api.DataTable;
+import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,22 +17,26 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Map;
 
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class MercuryToursSteps {
- private static final Logger LOG = LoggerFactory.getLogger(MercuryToursRegistrationPage.class);
+
+    private static final Logger LOG = LoggerFactory.getLogger(MercuryToursSteps.class);
+
  private MercuryToursRegistrationPage mercuryToursRegistrationPage;
+
 
     public MercuryToursSteps(MercuryToursRegistrationPage mercuryToursRegistrationPage){
         this.mercuryToursRegistrationPage = mercuryToursRegistrationPage;
+
     }
 
     @Given("^the user is on the \"(.*?)\" page$")
     public void the_user_is_on_the_page(String pageName) throws Throwable {
         if (pageName.equalsIgnoreCase("HOME")) {
-
             UrlBuilder.startAtHomePage();
 
         }
@@ -133,23 +142,96 @@ public class MercuryToursSteps {
     }
 
     @When("^I enter valid login credentials$")
-    public void iEnterValidLoginCredentials(List<MercuryLoginUserModel> enterCredentials) throws Throwable {
 
-        for(MercuryLoginUserModel obj1 : enterCredentials) {
+   // public void iEnterValidLoginCredentials(DataTable usercredentials){
 
-            mercuryToursRegistrationPage.enterLoginCredentials(obj1);
-            mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
 
+        //Method-3  creating as a Map making user name and password as a key value pair.
+//        for (Map<String, String> data : usercredentials.asMaps(String.class,String.class))
+//        {
+//
+//            mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(data.get("username"));
+//            mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(data.get("password"));
+//            mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
+//            mercuryToursRegistrationPage.userNameFieldInLoginPage().clear();
+//
+//        }
+
+
+        //public void iEnterValidLoginCredentials()  {
+
+// Method -1 when you have different test environments
+        public void iEnterValidLoginCredentials(){
+        mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(Props.getProp("username"));
+        mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(Props.getProp("password"));
+        mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
+
+
+
+
+ //Method-2 creating a model class and putting the header values and getting the data using modals
+//         public void iEnterValidLoginCredentials(DataTable userCredentials){
+//          List<Map<String, String >> data = userCredentials.asMaps(String.class,String.class);
+//          mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(data.get(0).get("username"));
+//          mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(data.get(0).get("password"));
+//          mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
+//          mercuryToursRegistrationPage.userNameFieldInLoginPage().clear();
+//          mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(data.get(1).get("username"));
+//          mercuryToursRegistrationPage.passwordFieldLoginPage().clear();
+//          mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(data.get(1).get("password"));
+//          mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
+
+//      Method -3    Luckily there are easier ways to access your data than DataTable.
+//          For instance you can create a Class-Object and have Cucumber map the data in a table to a list of these.
+//           public void iEnterValidLoginCredentials(List<MercuryLoginUserModel> enterCredentials) throws Throwable {
+//           for(MercuryLoginUserModel obj1 : enterCredentials) {
+//            mercuryToursRegistrationPage.enterLoginCredentials(obj1);
+//            mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
+
+
+//           //Method-4  public void iEnterValidLoginCredentials(DataTable usercredentials){
+//            creating as a Map making user name and password as a key value pair.
+//            for (Map<String, String> data : usercredentials.asMaps(String.class,String.class))
+//            {
+//
+//                mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(data.get("username"));
+//                mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(data.get("password"));
+//                mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
+//                mercuryToursRegistrationPage.userNameFieldInLoginPage().clear();
+//
+//            }
 
         }
+      //        Col 0       Col 1
+     // Row 0 | kumar    | ravuri     |
+    //  Row 1 | testrav  | sasdsadasd |
+    //  Row 2 | divya    | bala       |
 
+    @When("^I enter valid login credentials as listoflist of string$")
+    public void iEnterValidLoginCredentialsAsListoflistOfString(DataTable usercredentials)  {
 
+        List<List<String>> data = usercredentials.raw();
+        //This is to get the first data of the set (Zeroth Row +  Zeroth Column)
+        mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(data.get(0).get(0));
+        //This is to get the first data of the set (Zeroth Row + First  Column)
+        mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(data.get(0).get(1));
+        mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
 
+        mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(data.get(1).get(0));
+        mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(data.get(1).get(1));
+        mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
 
-    }
+        mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(data.get(2).get(0));
+        mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(data.get(2).get(1));
+        mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
+
+     }
+
 
     @And("^I click on login button on MercuryTours Page$")
     public void iClickOnLoginButtonOnMercuryToursPage() throws Throwable {
+        mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(Props.getProp("username"));
+        mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(Props.getProp("password"));
         mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
 
     }
@@ -170,4 +252,6 @@ public class MercuryToursSteps {
        mercuryToursRegistrationPage.getCurrentPageTitle();
 
     }
+
+
 }

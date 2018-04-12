@@ -36,6 +36,15 @@ public class MercuryToursRegistrationPage extends PageObject {
 
 
 
+    public WebElement userNameFieldInLoginPage(){
+        return waitForExpectedElement(userNameFieldSignOn);
+
+    }
+
+    public WebElement passwordFieldLoginPage(){
+        return waitForExpectedElement(passwordFieldSignOn);
+    }
+
     public WebElement firstNameTextField(){
         return  waitForExpectedElement(firstNameField);
     }
