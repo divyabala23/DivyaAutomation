@@ -1,5 +1,8 @@
 package com.salmon.test.step_definitions.gui.register;
 
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.specification.RequestSpecification;
+import com.salmon.test.framework.helpers.Props;
 import com.salmon.test.framework.helpers.UrlBuilder;
 import com.salmon.test.page_objects.gui.WikipediaPage;
 import cucumber.api.java.en.And;
@@ -13,7 +16,7 @@ import org.slf4j.LoggerFactory;
 public class WikipediaSteps {
 
 
-
+    private RequestSpecification request;
     private static String inputData;
     private static final Logger LOG = LoggerFactory.getLogger(WikipediaSteps.class);
     private WikipediaPage wikipediapage;
@@ -26,6 +29,7 @@ public class WikipediaSteps {
     @Given("^I navigate to the wikipedia \"([^\"]*)\" page$")
     public void iNavigateToTheWikipediaPage(String pageName) throws Throwable {
         if (pageName.equalsIgnoreCase("HOME")) {
+            request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
             UrlBuilder.startAtHomePage();
 
         }

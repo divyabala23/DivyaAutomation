@@ -1,38 +1,70 @@
 package com.salmon.test.step_definitions.api;
 
-import cucumber.api.PendingException;
+import com.jayway.restassured.RestAssured;
+import com.jayway.restassured.path.json.JsonPath;
+import com.jayway.restassured.response.Response;
+import com.jayway.restassured.specification.RequestSpecification;
+import com.salmon.test.framework.helpers.Props;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.testng.Assert;
+
+import java.util.List;
 
 public class BookApiSteps {
-    @Given("^a book exists with an isbn of (\\d+)$")
-    public void aBookExistsWithAnIsbnOf(int arg0)  {
+    private RequestSpecification request;
+    private Response response = null;
+    private JsonPath jsonPathEvaluator;
+
+
+    @Given("^I request all books api$")
+    public void iRequestAllBooksApi() throws Throwable {
+        RestAssured.baseURI = Props.getProp("api.url");
 
     }
 
-    @When("^a user retrieves the book by isbn$")
-    public void aUserRetrievesTheBookByIsbn() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
+    @When("^I request as a jsonpath$")
+    public void iRequestAsAJsonpath()  {
+        request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
+        response = request.get("");
+        System.out.println("Response Body is =>  " + response.asString());
     }
 
-    @Then("^the status code is (\\d+)$")
-    public void theStatusCodeIs(int arg0) throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
+
+    @And("^I call using http request$")
+    public void i_call_using_http_request() throws Throwable {
+
+        jsonPathEvaluator = response.jsonPath();
+        List<String> allbooks = jsonPathEvaluator.getList("books.title");
+        for(String book : allbooks)
+        {
+            System.out.println("The book titles are : " +book);
+        }
+
+
     }
 
-    @And("^response includes the following$")
-    public void responseIncludesTheFollowing() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
+
+    @Then("^Verify the (\\d+) responsecode is returned in the response$")
+    public void verifyTheResponsecodeIsReturnedInTheResponse(int statusCode)  {
+        statusCode = response.getStatusCode();
+        Assert.assertEquals(statusCode,200);
+        System.out.println("The code displayed is "   + statusCode);
+
     }
 
-    @And("^response includes the following in any order$")
-    public void responseIncludesTheFollowingInAnyOrder() throws Throwable {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+
+
+    @And("^response includes all the books$")
+    public void response_includes_all_the_books() throws Throwable {
+
     }
+
+
 }
+

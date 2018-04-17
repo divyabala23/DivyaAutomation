@@ -3,12 +3,9 @@ package com.salmon.test.step_definitions.gui;
 
 import com.salmon.test.framework.helpers.Props;
 import com.salmon.test.framework.helpers.UrlBuilder;
-import com.salmon.test.models.cucumber.MercuryLoginUserModel;
 import com.salmon.test.models.cucumber.MercuryToursSignUpModel;
 import com.salmon.test.page_objects.gui.MercuryToursRegistrationPage;
-import com.salmon.test.page_objects.gui.MyAccountSummaryPage;
 import cucumber.api.DataTable;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -18,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Map;
-
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -143,28 +139,31 @@ public class MercuryToursSteps {
 
     @When("^I enter valid login credentials$")
 
-   // public void iEnterValidLoginCredentials(DataTable usercredentials){
+    public void iEnterValidLoginCredentials(DataTable usercredentials){
 
 
-        //Method-3  creating as a Map making user name and password as a key value pair.
-//        for (Map<String, String> data : usercredentials.asMaps(String.class,String.class))
-//        {
-//
-//            mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(data.get("username"));
-//            mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(data.get("password"));
-//            mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
-//            mercuryToursRegistrationPage.userNameFieldInLoginPage().clear();
-//
-//        }
+//        Method-3  creating as a Map making user name and password as a key value pair.
+        for (Map<String, String> data : usercredentials.asMaps(String.class,String.class))
+        {
+
+            System.out.println("data = " + data);
+            System.out.println("data.get(\"Username\") = " + data.get("username"));
+            System.out.println("data.get(\"password\") = " + data.get("password"));
+            mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(data.get("username"));
+            mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(data.get("password"));
+            mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
+            mercuryToursRegistrationPage.userNameFieldInLoginPage().clear();
+
+        }
 
 
-        //public void iEnterValidLoginCredentials()  {
+ //       public void iEnterValidLoginCredentials()  {
 
 // Method -1 when you have different test environments
-        public void iEnterValidLoginCredentials(){
-        mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(Props.getProp("username"));
-        mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(Props.getProp("password"));
-        mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
+//        public void iEnterValidLoginCredentials(){
+//        mercuryToursRegistrationPage.userNameFieldInLoginPage().sendKeys(Props.getProp("username"));
+//        mercuryToursRegistrationPage.passwordFieldLoginPage().sendKeys(Props.getProp("password"));
+//        mercuryToursRegistrationPage.clickOnSubmitSignOnPage();
 
 
 

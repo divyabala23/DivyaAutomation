@@ -1,6 +1,5 @@
 package com.salmon.test.framework.helpers;
 
-import cucumber.api.java.en.And;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,9 +13,13 @@ public class UrlBuilder {
     private static URL basePath;
     private static URL apiUrl;
 
+
+
+
     static {
         try {
             Props.loadRunConfigProps(RUN_CONFIG_PROPERTIES);
+
             basePath = new URL(Props.getProp("site.url"));
             apiUrl = new URL(Props.getProp("api.url"));
 
@@ -27,6 +30,7 @@ public class UrlBuilder {
     }
 
     public static void startAtHomePage() {
+
         WebDriverHelper.getWebDriver().navigate().to((basePath));
     }
 

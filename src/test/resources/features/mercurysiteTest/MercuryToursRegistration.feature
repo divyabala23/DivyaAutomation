@@ -33,9 +33,9 @@ Feature: As a new user I want to register in mercury travel site
   Scenario: verify the registered user can login
     And I click on signon button
     When I enter valid login credentials
-#      | username | password   |
-#      | saddasda | asdddasda  |
-#      | testrav  | sasdsadasd |
+      | username | password   |
+      | saddasda | asdddasda  |
+      | testrav  | sasdsadasd |
     And I click on login button on MercuryTours Page
     Then I should be able to login successfully
 

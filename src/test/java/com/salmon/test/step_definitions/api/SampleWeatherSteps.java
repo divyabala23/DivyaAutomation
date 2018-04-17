@@ -30,7 +30,8 @@ public class SampleWeatherSteps {
 
     @Given("^I request GetWeatherDetails by location$")
     public void iRequestGetWeatherDetailsByLocation()  {
-    RestAssured.baseURI = Props.getProp("api.url");
+
+        RestAssured.baseURI = Props.getProp("api.url");
     }
 
 
