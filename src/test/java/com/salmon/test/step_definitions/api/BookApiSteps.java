@@ -5,6 +5,7 @@ import com.jayway.restassured.path.json.JsonPath;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.salmon.test.framework.helpers.Props;
+import com.salmon.test.models.api.BookModel;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -35,7 +36,7 @@ public class BookApiSteps {
 
 
 
-    @And("^I call using http request$")
+    @And("^I call using http request as a list$")
     public void i_call_using_http_request() throws Throwable {
 
         jsonPathEvaluator = response.jsonPath();
@@ -59,12 +60,17 @@ public class BookApiSteps {
     }
 
 
+    @And("^I read all the books as a list of string by using model class$")
+    public void iReadAllTheBooksAsAListOfStringByUsingModelClass()  {
 
-    @And("^response includes all the books$")
-    public void response_includes_all_the_books() throws Throwable {
+        jsonPathEvaluator = response.jsonPath();
+        List<BookModel> allbooks = jsonPathEvaluator.getList("books", BookModel.class);
+        for(BookModel book : allbooks)
+        {
+            System.out.println("The book titles are : " +book);
+        }
+
 
     }
-
-
 }
 

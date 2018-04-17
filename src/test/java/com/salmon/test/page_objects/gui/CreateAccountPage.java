@@ -82,7 +82,7 @@ public class CreateAccountPage extends PageObject {
     private By phoneNumberTextField = By.cssSelector("div > div:nth-of-type(6) > input");
     private By addAddressSubmitButton = By.linkText("Add Address");
     private By errorMessageOnFields = By.cssSelector("div.dijitTooltipContainer.dijitTooltipContents");
-    private By addressBook = By.linkText("My Address Book");
+    private By addressBook = By.linkText("My Address BookModel");
     private By removeAddress = By.linkText("Remove Address");
 
     public void clickOnAddressSubmitButton(){
