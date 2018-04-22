@@ -6,7 +6,6 @@ import com.jayway.restassured.response.ResponseBody;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.salmon.test.framework.helpers.Props;
 import com.salmon.test.models.api.RegistrationSuccessResponse;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -15,7 +14,6 @@ import org.json.JSONObject;
 import org.testng.Assert;
 
 import java.util.Map;
-import java.util.logging.Logger;
 
 import static org.slf4j.LoggerFactory.getLogger;
 

@@ -1,21 +1,24 @@
 package com.salmon.test.models.api;
 
-/**
- * Created by ravuris on 17/04/2018.
- */
-
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Data;
 import lombok.experimental.FieldDefaults;
 
-@FieldDefaults(level = AccessLevel.PRIVATE)
+/**
+ * Created by ravuris on 18/04/2018.
+ *
+ **/@Builder
 @Data
-public class BookModel {
+@FieldDefaults(level = AccessLevel.PRIVATE)
 
+
+public class Book {
     String isbn;
     String title;
     String subtitle;
     String author;
+    String published;
     String publisher;
     int pages;
     String description;

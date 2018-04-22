@@ -1,11 +1,12 @@
 package com.salmon.test.step_definitions.api;
 
+
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.path.json.JsonPath;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.salmon.test.framework.helpers.Props;
-import com.salmon.test.models.api.BookModel;
+import com.salmon.test.models.api.Book;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -50,7 +51,6 @@ public class BookApiSteps {
     }
 
 
-
     @Then("^Verify the (\\d+) responsecode is returned in the response$")
     public void verifyTheResponsecodeIsReturnedInTheResponse(int statusCode)  {
         statusCode = response.getStatusCode();
@@ -64,8 +64,15 @@ public class BookApiSteps {
     public void iReadAllTheBooksAsAListOfStringByUsingModelClass()  {
 
         jsonPathEvaluator = response.jsonPath();
-        List<BookModel> allbooks = jsonPathEvaluator.getList("books", BookModel.class);
-        for(BookModel book : allbooks)
+      //  System.out.println("jsonPathEvaluator.getList(\"books.title\", Book.class):" + jsonPathEvaluator.getList("books"));
+
+        List<Book> allbooks = jsonPathEvaluator.getList("books", Book.class);
+
+       // Book[] books = response.jsonPath().getObject("books", Book[].class);
+      //  System.out.println("allbooks.size()" + allbooks.size());
+
+      for(Book book:allbooks)
+        //for(Book book : allbooks)
         {
             System.out.println("The book titles are : " +book);
         }

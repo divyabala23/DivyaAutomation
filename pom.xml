@@ -321,6 +321,19 @@
             <artifactId>rest-assured</artifactId>
             <version>${rest-assured}</version>
         </dependency>
+        <!--<Matchers Api testing-->
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest-all</artifactId>
+            <version>1.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-path</artifactId>
+            <version>3.0.7</version>
+        </dependency>
+
         <!-- Api Level Testing -->
 
         <dependency>

@@ -16,5 +16,12 @@ Feature: Get all books api
     And  I read all the books as a list of string by using model class
 
 
+  Scenario: Verify the basic authentication process
+
+    Given I navigate to restapi demoqa site
+    When  request the check for authentication URI
+    And   I get the status code
+
+
 
 

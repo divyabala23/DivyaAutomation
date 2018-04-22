@@ -18,6 +18,8 @@ public class UkLocationSteps {
     private HttpResponse response;
     String body;
 
+
+
     @Given("^I have UK location service available$")
     public void iHaveUKLocationServiceAvailable() throws Throwable {
 
