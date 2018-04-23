@@ -8,13 +8,13 @@ import lombok.experimental.FieldDefaults;
 /**
  * Created by ravuris on 18/04/2018.
  *
- **/@Builder
+ **/
+
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 
-
 public class Book {
-    String isbn;
+
     String title;
     String subtitle;
     String author;

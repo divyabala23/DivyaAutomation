@@ -24,7 +24,8 @@ public class AuthenticationSteps {
     @Given("^I navigate to restapi demoqa site$")
     public void i_navigate_to_restapi_demoqa_site()  {
         RestAssured.baseURI = Props.getProp("api.url");
-        request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
+        request = RestAssured.given();
+                //.proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
 
 
     }
