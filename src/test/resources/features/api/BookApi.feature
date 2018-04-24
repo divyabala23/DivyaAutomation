@@ -20,8 +20,18 @@ Feature: Get all books api
   Scenario: Verify the basic authentication process
 
     Given I navigate to restapi demoqa site
-    When  request the check for authentication URI
-    And   I get the status code
+    When  I request the check for authentication URI
+    Then I get the success status code
+
+
+
+  Scenario: verify the basic authentication process
+
+    Given I navigate to restapi demoqa site
+    When  I request the check for authentication URI
+    And I enter username and password
+    Then I get the success status code
+    #Then I get success message
 
 
 
