@@ -7,8 +7,11 @@ import com.jayway.restassured.path.json.JsonPath;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.specification.RequestSpecification;
 import com.salmon.test.framework.helpers.Props;
+<<<<<<< HEAD
 import com.salmon.test.models.api.Book;
 import com.salmon.test.models.api.Books;
+=======
+>>>>>>> master
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -66,20 +69,36 @@ public class BookApiSteps {
     @And("^I read all the books as a list of string by using model class$")
     public void iReadAllTheBooksAsAListOfStringByUsingModelClass()  {
 
+<<<<<<< HEAD
         jsonPathEvaluator = response.jsonPath();
        // System.out.println("jsonPathEvaluator.getList(\"books.title\", Book.class):" + jsonPathEvaluator.getList("books"));
        // List<String> bookTitlesList = jsonPathEvaluator.getList("books.title");
         Gson gson = new Gson();
         Books booksList = gson.fromJson(response.asString(),Books.class);
        // Books allbooks = jsonPathEvaluator.getObject("books", Books.class);
+=======
+        //jsonPathEvaluator = response.jsonPath();
+      //  System.out.println("jsonPathEvaluator.getList(\"books.title\", Book.class):" + jsonPathEvaluator.getList("books"));
+
+    //    Books listOfBooks = gson().fromJson(Books.class);
+
+       // List<Book> allbooks = jsonPathEvaluator.getList("books", Book.class);
+>>>>>>> master
 
        // Book[] books = response.jsonPath().getObject("books", Book[].class);
       //  System.out.println("allbooks.size()" + allbooks.size());
 
+<<<<<<< HEAD
       //for(Books book:booksList)
         //for(Book book : allbooks)
         {
             System.out.println("The book titles are : " +booksList);
+=======
+     // for(Book book:allbooks)
+        //for(Book book : allbooks)
+        {
+          //  System.out.println("The book titles are : " +book);
+>>>>>>> master
         }
 
 

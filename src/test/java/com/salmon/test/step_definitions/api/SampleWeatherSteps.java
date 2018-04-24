@@ -10,6 +10,8 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 
+import static com.jayway.restassured.RestAssured.given;
+
 public class SampleWeatherSteps {
 
 
@@ -30,17 +32,18 @@ public class SampleWeatherSteps {
 
     @Given("^I request GetWeatherDetails by location$")
     public void iRequestGetWeatherDetailsByLocation()  {
+       RestAssured.baseURI = Props.getProp("api.url");
 
-        RestAssured.baseURI = Props.getProp("api.url");
     }
 
 
     @When("^I request location by  \"([^\"]*)\"$")
     public void iRequestLocationBy(String city) throws Throwable {
        Location = "city";
-       request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
+       request = given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
        response = request.get(city);
-       System.out.println("Response Body is =>  " + response.asString());
+        given().log().body();
+     //  System.out.println("Response Body is =>  " + response.asString());
         //System.out.println("response: " + response.prettyPrint());
     }
 
@@ -49,15 +52,18 @@ public class SampleWeatherSteps {
     public void verifyTheResponseInTheRequest(int statusCode)  {
 
         json = response.then().statusCode(statusCode);
-        Assert.assertEquals(statusCode,response.getStatusCode());
-        System.out.println("The status code displayed is : " + response.getStatusCode());
+        given().log().all();
+
+         Assert.assertEquals(statusCode,response.getStatusCode());
+        // System.out.println("The status code displayed is : " + response.getStatusCode());
         }
 
     @And("^I get response with weather report$")
     public void iGetResponseWithWeatherReport() {
 
         responseBody = response.getBody().asString();
-        System.out.println("Response Body is => "  + responseBody);
+        given().log().body();
+        //System.out.println("Response Body is => "  + responseBody);
 
 
     }
