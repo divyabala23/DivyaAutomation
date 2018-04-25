@@ -3,6 +3,7 @@ package com.salmon.test.step_definitions.api;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.*;
 import com.jayway.restassured.specification.RequestSpecification;
+import com.salmon.test.enums.ServiceEndPoints;
 import com.salmon.test.framework.helpers.Props;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -11,6 +12,7 @@ import cucumber.api.java.en.When;
 import org.testng.Assert;
 
 import static com.jayway.restassured.RestAssured.given;
+import static com.jayway.restassured.RestAssured.when;
 
 public class SampleWeatherSteps {
 
@@ -39,31 +41,30 @@ public class SampleWeatherSteps {
 
     @When("^I request location by  \"([^\"]*)\"$")
     public void iRequestLocationBy(String city) throws Throwable {
-       Location = "city";
-       request = given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
-       response = request.get(city);
-        given().log().body();
-     //  System.out.println("Response Body is =>  " + response.asString());
-        //System.out.println("response: " + response.prettyPrint());
+      // Location = "city";
+        request = RestAssured.given().log().all();
+               //.proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
+
+        response =  request.get(ServiceEndPoints.GET_WEATHER_BY_CITY.getUrl().concat(city));
+
+        System.out.println("response: " + response.prettyPrint());
     }
 
 
     @Then("^Verify the (\\d+) response in the request$")
     public void verifyTheResponseInTheRequest(int statusCode)  {
-
         json = response.then().statusCode(statusCode);
-        given().log().all();
-
+        //given().log().all();
          Assert.assertEquals(statusCode,response.getStatusCode());
-        // System.out.println("The status code displayed is : " + response.getStatusCode());
+        System.out.println("The status code displayed is : " + response.getStatusCode());
         }
 
     @And("^I get response with weather report$")
     public void iGetResponseWithWeatherReport() {
 
         responseBody = response.getBody().asString();
-        given().log().body();
-        //System.out.println("Response Body is => "  + responseBody);
+        //given().log().all();
+        System.out.println("Response Body is => "  + responseBody);
 
 
     }
@@ -95,12 +96,8 @@ public class SampleWeatherSteps {
 
         contentType = response.header("Content-Type");
         System.out.println("Content-Type value : " + contentType);
-
-
         serverType = response.header("Server");
         System.out.println("Server value : " + serverType);
-
-
         acceptLanguage = response.header("Content-Encoding");
         System.out.println("Content-Encoding: " + acceptLanguage);
 

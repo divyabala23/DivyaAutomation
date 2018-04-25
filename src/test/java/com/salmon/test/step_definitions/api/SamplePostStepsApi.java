@@ -1,10 +1,13 @@
 package com.salmon.test.step_definitions.api;
 
+import com.google.gson.Gson;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import com.jayway.restassured.response.ResponseBody;
 import com.jayway.restassured.specification.RequestSpecification;
+import com.salmon.test.enums.ServiceEndPoints;
 import com.salmon.test.framework.helpers.Props;
+import com.salmon.test.models.api.Books;
 import com.salmon.test.models.api.RegistrationSuccessResponse;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
@@ -33,20 +36,22 @@ public class SamplePostStepsApi {
 
     @Given("^I send a request to demoqa customer register endpoint$")
     public void iSendARequestToDemoqaCustomerRegisterEndpoint(){
-        RestAssured.baseURI = Props.getProp("postapi.url");
+        RestAssured.baseURI = Props.getProp("api.url");
         request = RestAssured.given();
         System.out.println("the url displayed is " + RestAssured.baseURI);
          }
 
     @When("^I post the below details$")
     public void iPostTheBelowDetails(Map<String,String> requestParams) throws Throwable {
-        request = RestAssured.given();
+     //   request = RestAssured.given();
 //        request = RestAssured.given().proxy(Props.getProp("WeatherApi.Proxy"),Integer.parseInt(Props.getProp("WeatherApi.Port")));
-        JSONObject jsonString = new JSONObject(requestParams);
+//        Gson gson = new Gson();
+//        gson.fromJson() = gson.fromJson(response.asString(), Books.class);
 
+        JSONObject jsonString = new JSONObject(requestParams);
         request.header("Content-Type", "application/json");
         request.body(jsonString.toString());
-        response = request.post("/register");
+        response = request.post(ServiceEndPoints.POST_CUSTOMER.getUrl());
         System.out.println("The request body returned is :  " +  response);
 
     }

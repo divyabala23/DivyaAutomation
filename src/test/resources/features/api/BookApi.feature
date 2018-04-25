@@ -29,9 +29,9 @@ Feature: Get all books api
 
     Given I navigate to restapi demoqa site
     When  I request the check for authentication URI
-    And I enter username and password
+    #And I enter username and password
     Then I get the success status code
-    #Then I get success message
+   # Then I get success message in the response
 
 
 
